@@ -3,13 +3,13 @@ package gradle_spring_autowired_study.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 
-import spring.ChangePaswordService;
-import spring.MemberDao;
-import spring.MemberInfoPrinter;
-import spring.MemberListPrinter;
-import spring.MemberPrinter;
-import spring.MemberRegisterService;
-import spring.VersionPrinter;
+import gradle_spring_autowired_study.spring.ChangePaswordService;
+import gradle_spring_autowired_study.spring.MemberDao;
+import gradle_spring_autowired_study.spring.MemberInfoPrinter;
+import gradle_spring_autowired_study.spring.MemberListPrinter;
+import gradle_spring_autowired_study.spring.MemberPrinter;
+import gradle_spring_autowired_study.spring.MemberRegisterService;
+import gradle_spring_autowired_study.spring.VersionPrinter;
 
 public class AppCont2 {
 	@Autowired

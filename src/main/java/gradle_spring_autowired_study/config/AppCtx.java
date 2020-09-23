@@ -1,15 +1,17 @@
 package gradle_spring_autowired_study.config;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import spring.ChangePaswordService;
-import spring.MemberDao;
-import spring.MemberInfoPrinter;
-import spring.MemberListPrinter;
-import spring.MemberPrinter;
-import spring.MemberRegisterService;
-import spring.VersionPrinter;
+import gradle_spring_autowired_study.spring.ChangePaswordService;
+import gradle_spring_autowired_study.spring.MemberDao;
+import gradle_spring_autowired_study.spring.MemberInfoPrinter;
+import gradle_spring_autowired_study.spring.MemberListPrinter;
+import gradle_spring_autowired_study.spring.MemberPrinter;
+import gradle_spring_autowired_study.spring.MemberRegisterService;
+import gradle_spring_autowired_study.spring.MemberSummaryPrinter;
+import gradle_spring_autowired_study.spring.VersionPrinter;
 
 @Configuration
 public class AppCtx {
@@ -20,31 +22,35 @@ public class AppCtx {
 	
 	@Bean
 	public MemberRegisterService memberRegSvc() {
-		return new MemberRegisterService(memberDao());
+		return new MemberRegisterService();
 	}
 	
 	@Bean
 	public ChangePaswordService changePwdSvc() {
 		ChangePaswordService pwdSvc = new ChangePaswordService();
-		pwdSvc.setMemberDao(memberDao());
 		return pwdSvc;
 	}
 	
 	@Bean
-	public MemberPrinter memberPrinter() {
+	@Qualifier("printer")
+	public MemberPrinter memberPrinter1() {
 		return new MemberPrinter();
 	}
 	
 	@Bean
+	@Qualifier("summaryPrinter")
+	public MemberSummaryPrinter memberPrinter2() {
+		return new MemberSummaryPrinter();
+	}
+	
+	@Bean
 	public MemberListPrinter listPrinter() {
-		return new MemberListPrinter(memberDao(),memberPrinter());
+		return new MemberListPrinter(/* memberDao(),memberPrinter() */);
 	}
 	
 	@Bean
 	public MemberInfoPrinter infoPrinter() {
 		MemberInfoPrinter infoPrinter = new MemberInfoPrinter();
-		infoPrinter.setMemberDao(memberDao());
-		infoPrinter.setPrinter(memberPrinter());
 		return infoPrinter;
 		
 	}
